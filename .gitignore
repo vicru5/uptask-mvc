@@ -1,0 +1,15 @@
+# Archivos y directorios de Node.js
+node_modules/
+package-lock.json
+
+# Archivos y directorios de Composer
+vendor/
+composer.lock
+
+# Archivos de entorno (si los tienes)
+.env
+
+# Archivos temporales y de caché (si los tienes)
+*.log
+tmp/
+cache/
