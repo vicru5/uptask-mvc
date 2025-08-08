@@ -35,7 +35,7 @@
         width: auto;
     }
     &:hover {
-        background-color: darken( $bgColor, 10% );
+        background-color: color-mix(in srgb, $bgColor 80%, black);
         cursor: pointer;
     }
 }
