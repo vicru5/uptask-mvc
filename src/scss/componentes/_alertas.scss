@@ -1,0 +1,22 @@
+@use 'base/variables' as v;
+
+.alertas{
+    padding: 1rem 1rem 1rem 2rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    min-width: 80rem;
+
+    &.error{
+        background-color: color-mix(in srgb, v.$rojo 30%, white);
+        color: v.$rojo;
+        border-left: .5rem solid v.$rojo;
+    }
+
+    &.exito{
+        background-color: color-mix(in srgb, v.$verde 30%, white);
+        color: v.$verde;
+        border-left: .5rem solid v.$verde;
+    }
+}
