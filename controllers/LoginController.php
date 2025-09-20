@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Classes\Email;
 use Model\Usuario;
 use MVC\Router;
 
@@ -45,6 +46,12 @@ class LoginController {
                     $usuario->crearToken();
 
                     $resultado = $usuario->guardar();
+
+                    // Enviar email
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarConfirmacion();
+
+
 
                     if ($resultado) {
                         header('Location: /mensaje');
@@ -91,8 +98,34 @@ class LoginController {
     }
     
     public static function confirmar(Router $router){
+
+        $token = s($_GET['token']);
+        if (!$token) {
+            header("Location:/");            
+        }
+
+        $usuario = Usuario::where('token',$token);
+
+        if (empty($usuario)) {
+            // No se encontro usuario
+            Usuario::setAlerta('error','Token no valido');
+        }else{
+            // Confirmar la cuenta
+            unset($usuario->password2);
+            $usuario->confirmado = 1;
+            $usuario->token = null;
+            
+            $usuario->guardar();
+
+            Usuario::setAlerta('exito','Cuenta comprobada correctamente');
+        }
+
+        $alertas = Usuario::getAlertas();
+
+
         $router->render('auth/confirmar',[
-            'titulo' => 'Confirma tu cuenta Uptask'
+            'titulo' => 'Confirma tu cuenta Uptask',
+            'alertas' => $alertas
         ]);
         
     }
