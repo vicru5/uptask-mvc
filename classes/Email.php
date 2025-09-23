@@ -52,4 +52,41 @@ class Email {
             echo "El correo no se envio";
         }
     }
+    
+    
+    public function enviarInstrucciones(){
+        $email = new PHPMailer();
+
+        try {
+            // Looking to send emails in production? Check out our Email API/SMTP product!
+            $email = new PHPMailer();
+            $email->isSMTP();
+            $email->Host = 'sandbox.smtp.mailtrap.io';
+            $email->SMTPAuth = true;
+            $email->Port = 2525;
+            $email->Username = '07192e3db9fbe9';
+            $email->Password = '8a855e7fc3edc8';
+
+            //Recipients
+            $email->setFrom('cuentas@uptask.com', 'Cuentas uptask');
+            $email->addAddress('cuentas@uptask.com', 'uptask.com');     //Add a recipient
+            $email->Subject = "Reestablece tu password";
+            $email->isHTML(true);
+            $email->CharSet = "UTF-8";
+
+            $contenido = "<html>";
+            $contenido .= "<p><strong>Hola ".$this->nombre . "</strong> Parece que haz olvidado tu password, sigue el siguiente enlace</p>";
+            $contenido .= "<p>Presiona Aqui: <a href='http://localhost/reestablecer?token=". $this->token . "'>Reestablecer password</a></p>";
+            $contenido .= "<p>Si tu no creaste esta cuenta, puedes ignorar este mensaje</p>";
+            $contenido .= "</html>";
+
+            $email->Body = $contenido;
+
+            $email->send();
+
+
+        } catch (\Throwable $e) {
+            echo "El correo no se envio";
+        }
+    }
 }
