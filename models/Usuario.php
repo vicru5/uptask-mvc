@@ -38,7 +38,7 @@ class Usuario extends ActiveRecord{
             self::$alertas['error'][] = 'El password no puede estar vacio';
         }
 
-        if (strlen($this->email) < 6) {
+        if (strlen($this->password) < 6) {
             self::$alertas['error'][] = 'El password debe tener al menos 6 caracteres';
         }
 
@@ -46,6 +46,27 @@ class Usuario extends ActiveRecord{
             self::$alertas['error'][] = 'Los passwords son diferentes';
         }
 
+        return self::$alertas;
+    }
+    
+    public function validarLogin(){
+
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El email es necesario';
+        }
+
+        if (!filter_var($this->email,FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'Email no valido';
+        }
+
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El password no puede estar vacio';
+        }
+
+        if (strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El password debe tener al menos 6 caracteres';
+        }
+        
         return self::$alertas;
     }
 
@@ -77,7 +98,7 @@ class Usuario extends ActiveRecord{
             self::$alertas['error'][] = 'El password no puede estar vacio';
         }
 
-        if (strlen($this->email) < 6) {
+        if (strlen($this->password) < 6) {
             self::$alertas['error'][] = 'El password debe tener al menos 6 caracteres';
         }
         
