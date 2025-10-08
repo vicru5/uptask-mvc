@@ -16,11 +16,11 @@ class DashboardController
         ]);
     }
 
-    public static function crear(Router $router)
+    public static function crear_proyecto(Router $router)
     {
         session_start();
         isAuth();
-        $router->render('dashboard/crear',[
+        $router->render('dashboard/crear-proyecto',[
             'titulo' => 'Crear-Proyecto'
         ]);
     }
