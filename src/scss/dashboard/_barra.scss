@@ -12,6 +12,7 @@
     align-items: center;
   }
 
+
   p{
     margin: 0;
     font-size: 1.4rem;
@@ -23,9 +24,9 @@
   }
 
   .cerrar-session{
-    @include m.boton(color-mix(in srgb, v.$indigo, black 10%),v.$blanco);
     font-size: 1.2rem;
     border-radius: .5rem;
     padding: 1rem;
+    @include m.boton(color-mix(in srgb, v.$indigo, black 10%),v.$blanco);
   }
 }
